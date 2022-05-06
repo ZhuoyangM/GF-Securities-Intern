@@ -1,0 +1,101 @@
+---
+title: "intern"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+F-test
+F test on stock
+```{r}
+results_stock=aov(stock~period,data=Stock_AR)
+summary(results_stock)
+```
+
+F test on bond
+```{r}
+results_bond=aov(bond~period,data=Bond_AR)
+summary(results_bond)
+```
+
+F test on commodity
+```{r}
+results_commodity=aov(commodity~period,data=Commodity_AR)
+summary(results_commodity)
+```
+
+F test on currency
+```{r}
+results_currency=aov(currency~period,data=Currency_AR)
+summary(results_currency)
+```
+
+
+T-test
+
+T-tests for recovery
+```{r}
+stock_recovery=unlist(as.list(Stock_AR[1:9,2]))
+bond_recovery=unlist(as.list(Bond_AR[1:9,2]))
+commodity_recovery=unlist(as.list(Commodity_AR[1:9,2]))
+currency_recovery=unlist(as.list(Currency_AR[1:9,2]))
+
+t.test(stock_recovery,commodity_recovery,alternative="two.sided",var.equal=FALSE,conf.level=0.95)
+
+t.test(stock_recovery,bond_recovery,alternative="two.sided",var.equal=FALSE,conf.level=0.95)
+
+t.test(commodity_recovery,bond_recovery,alternative="two.sided",var.equal=FALSE,conf.level=0.95)
+
+```
+
+
+T-tests for boom
+```{r}
+stock_boom=unlist(as.list(Stock_AR[10:14,2]))
+bond_boom=unlist(as.list(Boom_AR[10:14,2]))
+commodity_boom=unlist(as.list(Commodity_AR[10:14,2]))
+currency_boom=unlist(as.list(Currency_AR[10:14,2]))
+
+t.test(stock_boom,commodity_boom,alternative="two.sided",var.equal=FALSE,conf.level=0.95)
+
+t.test(stock_boom,bond_boom,alternative="two.sided",var.equal=FALSE,conf.level=0.95)
+
+t.test(commodity_boom,bond_boom,alternative="two.sided",var.equal=FALSE,conf.level=0.95)
+
+```
+
+T-tests for slowdown
+```{r}
+stock_slowdown=unlist(as.list(Stock_AR[15:21,2]))
+bond_slowdown=unlist(as.list(Bond_AR[15:21,2]))
+commodity_slowdown=unlist(as.list(Commodity_AR[15:21,2]))
+currency_slowdown=unlist(as.list(Currency_AR[15:21,2]))
+
+t.test(stock_slowdown,commodity_slowdown,alternative="two.sided",var.equal=FALSE,conf.level=0.95)
+
+t.test(stock_slowdown,bond_slowdown,alternative="two.sided",var.equal=FALSE,conf.level=0.95)
+
+t.test(commodity_slowdown,bond_slowdown,alternative="two.sided",var.equal=FALSE,conf.level=0.95)
+
+```
+
+
+T-tests for recession
+```{r}
+stock_recession=unlist(as.list(Stock_AR[12:28,2]))
+bond_recession=unlist(as.list(Bond_AR[22:28,2]))
+commodity_recession=unlist(as.list(Commodity_AR[22:28,2]))
+currency_recession=unlist(as.list(Currency_AR[22:28,2]))
+
+t.test(stock_recession,commodity_recession,alternative="two.sided",var.equal=FALSE,conf.level=0.95)
+
+t.test(stock_recession,bond_recession,alternative="two.sided",var.equal=FALSE,conf.level=0.95)
+
+t.test(commodity_recession,bond_recession,alternative="two.sided",var.equal=FALSE,conf.level=0.95)
+
+
+```
+
+
